@@ -1,0 +1,244 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="position:fixed;inset:0;display:block;background:#080f1c;">
+  <title>SoakHub — Games Library</title>
+  <foreignObject x="0" y="0" width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="soakhub">
+      <style><![CDATA[
+        * { box-sizing:border-box; }
+        #soakhub { --bg:#080f1c; --surface:#101d30; --surface2:#14243a; --line:#263951; --text:#e8f1ff; --muted:#8ba4bf; --blue:#4caaff; --cyan:#68dbf5; width:100%;height:100%;overflow:auto;color:var(--text);background:radial-gradient(ellipse 95% 48% at 48% -20%,#1f4770 0%,transparent 72%),var(--bg);font:14px/1.45 system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif; }
+        #soakhub button, #soakhub input, #soakhub select { font:inherit; }
+        #soakhub button { cursor:pointer; }
+        #soakhub button:focus-visible, #soakhub input:focus-visible, #soakhub select:focus-visible, #soakhub [role="button"]:focus-visible {outline:2px solid var(--cyan);outline-offset:3px;}
+        #soakhub .topbar { position:sticky;top:0;z-index:20;background:rgba(11,22,39,.96);border-bottom:1px solid #284361;backdrop-filter:blur(16px);box-shadow:0 4px 22px rgba(0,0,0,.18); }
+        #soakhub .nav { max-width:1690px;margin:auto;min-height:78px;padding:12px 32px;display:flex;align-items:center;gap:24px; }
+        #soakhub .brand { display:flex;align-items:center;gap:11px;min-width:196px; }
+        #soakhub .brand-icon { width:46px;height:46px;background:linear-gradient(150deg,#2e91e6,#2053a9);border:1px solid #75c7ff80;border-radius:13px;display:grid;place-items:center;box-shadow:0 5px 16px #12458155;flex:none; }
+        #soakhub .brand-icon svg { width:31px;height:31px; }
+        #soakhub .brand-name {font-size:23px;font-weight:780;letter-spacing:-1.1px;line-height:1.1;}
+        #soakhub .brand-name span {color:#77d7ff;}
+        #soakhub .brand-sub {font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#7599bc;font-weight:750;margin-top:3px;}
+        #soakhub .search-controls {display:flex;align-items:center;justify-content:center;gap:11px;flex:1;min-width:0;}
+        #soakhub .search-wrap {position:relative;width:min(380px,100%);}
+        #soakhub .search-wrap svg {position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#91acc9;}
+        #soakhub .search-input,#soakhub .select {background:#101e32;border:1px solid #2b425c;border-radius:11px;height:42px;color:var(--text);outline:none;transition:.2s border-color,.2s background;}
+        #soakhub .search-input:hover,#soakhub .select:hover {border-color:#507ba0;}
+        #soakhub .search-input:focus,#soakhub .select:focus {border-color:#4dafff;}
+        #soakhub .search-input {width:100%;padding:0 14px 0 42px;}
+        #soakhub .search-input::placeholder {color:#91a7be;}
+        #soakhub .select {padding:0 33px 0 14px;min-width:126px;cursor:pointer;color:#d7e8fb;}
+        #soakhub .select option {background:#13243c;color:white;}
+        #soakhub .nav-actions {display:flex;gap:9px;align-items:center;justify-content:flex-end;min-width:130px;}
+        #soakhub .icon-btn {width:42px;height:42px;border-radius:11px;border:1px solid #2d4a66;background:#152c46;color:#adceee;display:grid;place-items:center;transition:background .15s,transform .15s,border-color .15s;}
+        #soakhub .icon-btn:hover {background:#204368;border-color:#4dafff;color:white;transform:translateY(-1px);}
+        #soakhub .icon-btn svg {width:21px;height:21px;}
+        #soakhub .canvas {max-width:1690px;padding:0 32px 70px;margin:0 auto;}
+        #soakhub .welcome {display:flex;justify-content:space-between;align-items:center;gap:20px;padding:39px 2px 31px;}
+        #soakhub .eyebrow {display:flex;align-items:center;gap:9px;color:#79cef8;font-size:11px;font-weight:750;letter-spacing:2.8px;text-transform:uppercase;margin-bottom:9px;}
+        #soakhub .pulse {width:7px;height:7px;border-radius:50%;background:#56d9ee;box-shadow:0 0 0 4px #56d9ee22;}
+        #soakhub h1 {margin:0;font-size:clamp(27px,3vw,41px);letter-spacing:-1.6px;font-weight:790;line-height:1.2;}
+        #soakhub h1 span {background:linear-gradient(100deg,#64b9ff,#70e1f1);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        #soakhub .welcome p {margin:9px 0 0;color:#95abc3;font-size:14px;}
+        #soakhub .stat {display:flex;align-items:center;gap:12px;background:linear-gradient(125deg,#18395688,#142c4488);padding:14px 20px;border-radius:15px;border:1px solid #2c4d6b;min-width:180px;}
+        #soakhub .stat-number {font-size:27px;font-weight:800;color:#9edfff;line-height:1;}
+        #soakhub .stat-label {font-size:11px;letter-spacing:1.4px;color:#8ba9c7;text-transform:uppercase;font-weight:750;}
+        #soakhub .section-head {display:flex;align-items:center;justify-content:space-between;gap:16px;margin:2px 0 17px;}
+        #soakhub .section-name {display:flex;align-items:center;gap:10px;margin:0;font-size:18px;letter-spacing:-.3px;font-weight:740;}
+        #soakhub .section-name svg {color:#69c9ff;}
+        #soakhub .count {color:#8baecb;border:1px solid #2a4564;border-radius:30px;background:#13263e;padding:2px 9px;font-size:12px;}
+        #soakhub .section-right {color:#83a2c0;font-size:12px;}
+        #soakhub .grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:18px;}
+        #soakhub .game-card {position:relative;min-width:0;background:linear-gradient(160deg,#182b42,#132238);border:1px solid #2b415b;border-radius:15px;overflow:hidden;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;cursor:pointer;}
+        #soakhub .game-card:hover {transform:translateY(-4px);border-color:#5596ca;box-shadow:0 14px 32px #0007,0 0 0 1px #429bd21c;}
+        #soakhub .game-art {aspect-ratio:1.04/1;position:relative;overflow:hidden;background:#16253a;}
+        #soakhub .game-art img {display:block;width:100%;height:100%;object-fit:cover;transition:transform .22s ease;}
+        #soakhub .game-card:hover .game-art img {transform:scale(1.045);}
+        #soakhub .art-overlay {pointer-events:none;position:absolute;inset:0;background:linear-gradient(0deg,#07131b66,transparent 32%);}
+        #soakhub .play-circle {display:grid;place-items:center;position:absolute;left:50%;top:50%;transform:translate(-50%,-44%) scale(.9);width:54px;height:54px;border-radius:50%;background:#08192fdc;border:1px solid #a1dafa96;box-shadow:0 9px 30px #0614238c;color:#e9f7ff;opacity:0;transition:.2s opacity,.2s transform;}
+        #soakhub .game-card:hover .play-circle {opacity:1;transform:translate(-50%,-50%) scale(1);}
+        #soakhub .favorite {position:absolute;right:9px;top:9px;width:34px;height:34px;border-radius:10px;background:#091a2aca;color:#c6d5e7;border:1px solid #ffffff44;display:grid;place-items:center;z-index:2;opacity:.6;}
+        #soakhub .favorite:hover,#soakhub .favorite.is-fav {opacity:1;color:#8cdfff;background:#173d5fdc;}
+        #soakhub .card-footer {min-height:68px;padding:11px 12px 10px;display:flex;flex-direction:column;justify-content:center;}
+        #soakhub .game-title {font-size:13px;font-weight:710;line-height:1.2;color:#e7f1ff;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+        #soakhub .game-genre {margin-top:5px;font-size:11px;color:#87a3c1;}
+        #soakhub .empty {display:none;text-align:center;border:1px dashed #385371;border-radius:16px;padding:60px 20px;color:#95afc9;}
+        #soakhub .empty strong {display:block;font-size:17px;color:#e4edfa;margin-bottom:6px;}
+        #soakhub .page-bottom {margin:45px 0 0;padding-top:20px;border-top:1px solid #253951;display:flex;justify-content:space-between;gap:12px;color:#6e8da9;font-size:12px;}
+        #soakhub .overlay {position:fixed;inset:0;display:none;z-index:50;background:#070d16;}
+        #soakhub .overlay.active {display:flex;flex-direction:column;}
+        #soakhub .playerbar {display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:66px;padding:10px 21px;border-bottom:1px solid #295374;background:linear-gradient(95deg,#174779,#102c50 58%,#0b2641);}
+        #soakhub .player-left {display:flex;align-items:center;gap:13px;min-width:0;}
+        #soakhub .player-title {font-size:16px;font-weight:760;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+        #soakhub .player-overline {font-size:10px;letter-spacing:1.8px;color:#a3d6fa;text-transform:uppercase;font-weight:700;}
+        #soakhub .player-actions {display:flex;gap:9px;flex:none;}
+        #soakhub .action-button {height:37px;display:inline-flex;align-items:center;gap:7px;padding:0 14px;border:1px solid #70b6e366;color:#e7f5ff;background:#2d6b9955;border-radius:10px;font-size:12px;font-weight:700;}
+        #soakhub .action-button:hover {background:#3c8bb077;border-color:#90d8fa;}
+        #soakhub .action-button svg {width:16px;height:16px;}
+        #soakhub .playarea {flex:1;position:relative;min-height:0;}
+        #soakhub .game-frame {position:absolute;inset:0;width:100%;height:100%;border:0;background:#04060a;display:block;}
+        #soakhub .loadscreen {position:absolute;inset:0;background:#090f1b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;z-index:2;pointer-events:none;transition:opacity .35s;}
+        #soakhub .loadscreen.done {opacity:0;visibility:hidden;}
+        #soakhub .loadscreen.failed {pointer-events:auto;}
+        #soakhub .water-mark {display:grid;place-items:center;width:94px;height:94px;background:linear-gradient(145deg,#1c5280,#15305a);border:1px solid #6eb2dc77;border-radius:23px;box-shadow:0 15px 50px #0e477045;margin-bottom:5px;}
+        #soakhub .water-mark svg {width:62px;height:62px;}
+        #soakhub .load-title {font-size:17px;font-weight:750;margin-top:3px;}
+        #soakhub .load-hint {font-size:12px;color:#86a6c4;text-align:center;max-width:420px;padding:0 12px;}
+        #soakhub .loading-bar {width:166px;height:4px;border-radius:6px;background:#29445c;overflow:hidden;margin-top:9px;}
+        #soakhub .loading-bar:before {content:'';display:block;width:45%;height:100%;background:linear-gradient(90deg,#468dff,#8eeeff);border-radius:6px;animation:loading 1.35s ease-in-out infinite alternate;}
+        @keyframes loading {from {transform:translateX(-100%);}to {transform:translateX(300%);}}
+        #soakhub .chat-panel {position:fixed;z-index:80;right:25px;bottom:22px;width:min(390px,calc(100vw - 28px));height:min(560px,calc(100vh - 105px));display:none;flex-direction:column;overflow:hidden;border:1px solid #3c6790;border-radius:17px;background:#0d1b2e;box-shadow:0 22px 80px #000b;}
+        #soakhub .chat-panel.open {display:flex;}
+        #soakhub .chat-head {height:59px;background:linear-gradient(110deg,#163f6b,#123254);border-bottom:1px solid #315478;display:flex;align-items:center;justify-content:space-between;padding:0 15px;gap:8px;}
+        #soakhub .chat-heading {display:flex;align-items:center;gap:9px;font-weight:770;font-size:14px;}
+        #soakhub .ai-icon {display:grid;place-items:center;width:30px;height:30px;border-radius:9px;background:#338cc94a;color:#8fe2ff;}
+        #soakhub .x-small {display:grid;place-items:center;border:0;background:transparent;color:#b9d1ec;width:31px;height:31px;border-radius:8px;}
+        #soakhub .x-small:hover {background:#ffffff16;}
+        #soakhub .chat-messages {flex:1;overflow:auto;padding:17px 15px;display:flex;flex-direction:column;gap:13px;}
+        #soakhub .bubble {font-size:13px;line-height:1.55;white-space:pre-wrap;overflow-wrap:anywhere;padding:11px 13px;border:1px solid #314864;border-radius:13px;max-width:92%;background:#182b43;align-self:flex-start;}
+        #soakhub .bubble.user {background:#235b8b;border-color:#3883b6;align-self:flex-end;}
+        #soakhub .chat-form {display:flex;gap:8px;padding:13px;background:#101f32;border-top:1px solid #2c4059;}
+        #soakhub .chat-form input {min-width:0;flex:1;background:#0a1728;border:1px solid #2b4966;border-radius:10px;color:#e5f4ff;padding:0 12px;height:42px;outline:none;}
+        #soakhub .chat-form button {height:42px;width:44px;display:grid;place-items:center;border:0;border-radius:10px;color:#071c2b;background:#79d4fb;font-weight:800;}
+        #soakhub .chat-form button:disabled {opacity:.4;cursor:wait;}
+        @media(max-width:900px){#soakhub .nav{flex-wrap:wrap;padding:12px 19px;gap:12px;}#soakhub .brand{min-width:0;flex:1;}#soakhub .nav-actions{min-width:0;}#soakhub .search-controls{order:3;width:100%;flex:0 0 100%;justify-content:stretch;}#soakhub .search-wrap{flex:1;}#soakhub .canvas{padding:0 19px 50px;}#soakhub .welcome{padding-top:28px;}#soakhub .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;}}
+        @media(max-width:520px){#soakhub .nav{padding:12px;}#soakhub .brand-name{font-size:20px;}#soakhub .brand-icon{width:40px;height:40px;}#soakhub .search-controls{gap:7px;}#soakhub .select{min-width:0;width:95px;padding-left:7px;padding-right:9px;font-size:12px;}#soakhub .search-input{font-size:12px;}#soakhub .welcome{padding:25px 0 22px;}#soakhub .welcome p{font-size:12px;}#soakhub .stat{display:none;}#soakhub .canvas{padding:0 12px 40px;}#soakhub .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;}#soakhub .game-card{border-radius:12px;}#soakhub .game-title{font-size:12px;}#soakhub .playerbar{padding:9px 11px;}#soakhub .action-button{padding:0 9px;font-size:11px;}#soakhub .section-right{display:none;}#soakhub .chat-panel{right:14px;bottom:12px;}#soakhub .player-overline{display:none;}}
+        @media(prefers-reduced-motion:reduce){#soakhub *,#soakhub *:before{animation:none!important;transition:none!important;}}
+      ]]></style>
+      <header class="topbar">
+        <nav class="nav" aria-label="SoakHub navigation">
+          <div class="brand" aria-label="SoakHub Home">
+            <div class="brand-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 17c6.1-7 12.5-7 19 0s12.9 7 19 0M5 28c6.1-7 12.5-7 19 0s12.9 7 19 0" fill="none" stroke="#e7f8ff" stroke-width="5" stroke-linecap="round"/></svg></div>
+            <div><div class="brand-name">Soak<span>Hub</span></div><div class="brand-sub">Dive in &amp; play</div></div>
+          </div>
+          <div class="search-controls">
+            <label class="search-wrap" aria-label="Search games">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+              <input class="search-input" id="search" type="search" placeholder="Search games..." autocomplete="off" />
+            </label>
+            <select class="select" id="genre" aria-label="Filter by category"><option value="all">All genres</option><option value="Social">Social</option><option value="Rhythm">Rhythm</option><option value="Action">Action</option><option value="Roguelike">Roguelike</option><option value="Simulation">Simulation</option><option value="Sports">Sports</option><option value="favorites">Favorites</option></select>
+            <select class="select" id="sort" aria-label="Sort games"><option value="default">Featured</option><option value="az">Name A–Z</option><option value="za">Name Z–A</option></select>
+          </div>
+          <div class="nav-actions">
+            <button class="icon-btn" id="chat-toggle" title="Soak AI chat" aria-label="Open AI chatbot"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16v12H9l-5 4z"/><path d="M8 10h8M8 13h5"/><path d="m18 2 1 2 2 1-2 1-1 2-1-2-2-1 2-1z"/></svg></button>
+            <button class="icon-btn" id="random-game" title="Play a random game" aria-label="Play a random game"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3h4v4M3 17l6-6M14 10l7-7M17 21h4v-4M3 7l6 6M14 14l7 7"/></svg></button>
+          </div>
+        </nav>
+      </header>
+      <main class="canvas">
+        <section class="welcome">
+          <div><div class="eyebrow"><span class="pulse"></span> Your gaming space</div><h1>Ready to <span>make waves?</span></h1><p>Your favorite games, all in one place. Pick a title and jump in.</p></div>
+          <div class="stat"><div class="stat-number" id="total-count">06</div><div><div class="stat-label">Games</div><div class="stat-label">Available</div></div></div>
+        </section>
+        <section aria-label="Game library">
+          <div class="section-head"><h2 class="section-name"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.6 6.4L21 11l-6.4 2.6L12 20l-2.6-6.4L3 11l6.4-2.6z"/></svg> Featured games <span class="count" id="visible-count">6</span></h2><span class="section-right">Choose a game to start playing</span></div>
+          <div class="grid" id="games"></div>
+          <div class="empty" id="empty"><strong>No games found</strong>Try a different search or category.</div>
+        </section>
+        <div class="page-bottom"><span>SoakHub · Your all-in-one game space</span><span>Stay cool. Keep playing.</span></div>
+      </main>
+      <section id="player" class="overlay" aria-label="Game player" aria-hidden="true">
+        <div class="playerbar">
+          <div class="player-left"><div class="brand-icon" style="width:38px;height:38px;border-radius:10px;"><svg viewBox="0 0 48 48" aria-hidden="true" style="width:24px;height:24px;"><path d="M5 17c6.1-7 12.5-7 19 0s12.9 7 19 0M5 28c6.1-7 12.5-7 19 0s12.9 7 19 0" fill="none" stroke="#e7f8ff" stroke-width="5" stroke-linecap="round"/></svg></div><div style="min-width:0;"><div class="player-overline">SoakHub / Now playing</div><div class="player-title" id="player-name">Game</div></div></div>
+          <div class="player-actions"><button id="fullscreen" class="action-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg> Fullscreen</button><button id="close-game" class="action-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5 19 19M19 5 5 19"/></svg> Close</button></div>
+        </div>
+        <div class="playarea" id="playarea"><iframe id="game-frame" class="game-frame" title="Game content" sandbox="allow-scripts allow-forms allow-pointer-lock allow-modals allow-popups allow-downloads" allow="fullscreen; autoplay; gamepad" allowfullscreen="allowfullscreen"></iframe>
+          <div class="loadscreen" id="loadscreen"><div class="water-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 17c6.1-7 12.5-7 19 0s12.9 7 19 0M5 28c6.1-7 12.5-7 19 0s12.9 7 19 0" fill="none" stroke="#e7f8ff" stroke-width="4.5" stroke-linecap="round"/></svg></div><div class="load-title" id="load-title">Loading game</div><div class="load-hint" id="load-hint">Preparing your game...</div><div class="loading-bar" id="loading-bar"></div></div>
+        </div>
+      </section>
+      <aside class="chat-panel" id="chat-panel" aria-label="Soak AI chatbot">
+        <div class="chat-head"><div class="chat-heading"><span class="ai-icon"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 3 2.4 6.6L21 12l-6.6 2.4L12 21l-2.4-6.6L3 12l6.6-2.4z"/></svg></span> Soak AI <span style="color:#80a7cb;font-weight:500;font-size:11px;">powered by Gemini</span></div><button class="x-small" id="chat-close" aria-label="Close AI chat"><svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5 19 19M19 5 5 19"/></svg></button></div>
+        <div class="chat-messages" id="messages" aria-live="polite"><div class="bubble">Hey! I’m Soak AI. Ask me about a game, controls, or what to play next.</div></div>
+        <form class="chat-form" id="chat-form"><input id="chat-input" maxlength="2000" placeholder="Ask Soak AI..." aria-label="Your message" autocomplete="off"/><button id="send-chat" type="submit" title="Send" aria-label="Send message"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m4 12 16-8-5 16-3.5-6.5L4 12zM11.5 13.5 20 4"/></svg></button></form>
+      </aside>
+    </div>
+  </foreignObject>
+  <script><![CDATA[
+    // SoakHub settings: paste your deployed Cloudflare Worker URL here.
+    // Do NOT put your Gemini API key in this SVG.
+    const CHAT_ENDPOINT = 'https://YOUR-WORKER.YOUR-SUBDOMAIN.workers.dev/';
+    const ASSETS = 'https://cdn.jsdelivr.net/gh/n1honium/SoakHub-Assets/';
+    const games = [
+      {name:'Among Us',file:'AmongUs.html',image:'AmongUs.png',genre:'Social'},
+      {name:'A Dance of Fire and Ice',file:'A-Dance-Of-Fire-And-Ice.html',image:'A-Dance-Of-Fire-And-Ice.png',genre:'Rhythm'},
+      {name:'Brotato',file:'Brotato.html',image:'Brotato.jpeg',genre:'Action'},
+      {name:'Binding of Isaac',file:'Binding-of-Isaac.html',image:'Binding-of-Isaac.png',genre:'Roguelike'},
+      {name:'Bitlife',file:'Bitlife.html',image:'Bitlife.png',genre:'Simulation'},
+      {name:'Basketball Stars',file:'Basketball-Stars.html',image:'Basketball-Stars.jpeg',genre:'Sports'}
+    ];
+    const $ = id => document.getElementById(id);
+    const grid = $('games');
+    const gameFrame = $('game-frame');
+    let favorites = new Set();
+    try {favorites = new Set(JSON.parse(localStorage.getItem('soakhub-favorites')||'[]'));} catch(e) {}
+    let requestId=0;
+    const history=[];
+    const SVGNS='http://www.w3.org/2000/svg';
+    const NS='http://www.w3.org/1999/xhtml';
+
+    function el(tag,className,text){ const node=document.createElementNS(NS,tag);if(className)node.className=className;if(text!==undefined)node.textContent=text;return node; }
+    function iconPath(d){const s=document.createElementNS(SVGNS,'svg');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('width','21');s.setAttribute('height','21');s.setAttribute('fill','none');s.setAttribute('stroke','currentColor');s.setAttribute('stroke-width','2');s.setAttribute('stroke-linecap','round');s.setAttribute('stroke-linejoin','round');const path=document.createElementNS(SVGNS,'path');path.setAttribute('d',d);s.appendChild(path);return s;}
+    function filteredGames(){ const q=$('search').value.toLowerCase().trim(); const type=$('genre').value;const sort=$('sort').value;const filtered=games.filter(g=>g.name.toLowerCase().includes(q)&&(type==='all'||g.genre===type||(type==='favorites'&&favorites.has(g.name))));if(sort==='az')filtered.sort((a,b)=>a.name.localeCompare(b.name));if(sort==='za')filtered.sort((a,b)=>b.name.localeCompare(a.name));return filtered; }
+    function render(){
+      grid.replaceChildren();const visible=filteredGames();$('total-count').textContent=String(games.length).padStart(2,'0');$('visible-count').textContent=visible.length;$('empty').style.display=visible.length?'none':'block';
+      visible.forEach(game=>{
+        const card=el('article','game-card');card.setAttribute('tabindex','0');card.setAttribute('role','button');card.setAttribute('aria-label','Play '+game.name);
+        const art=el('div','game-art');const image=el('img');image.src=ASSETS+game.image;image.alt=game.name+' cover';image.loading='lazy';
+        image.onerror=()=>{image.onerror=null;image.style.display='none';art.style.background='linear-gradient(135deg,#1b4778,#0a192b)';};
+        art.appendChild(image);art.appendChild(el('div','art-overlay'));
+        const play=el('div','play-circle');play.appendChild(iconPath('m9 6 10 6-10 6z'));art.appendChild(play);
+        const fav=el('button','favorite'+(favorites.has(game.name)?' is-fav':''));fav.setAttribute('aria-label',(favorites.has(game.name)?'Unfavorite ':'Favorite ')+game.name);fav.title='Toggle favorite';fav.appendChild(iconPath('m12 3 2.7 5.7 6.3.9-4.5 4.4 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.5-4.4 6.3-.9z'));
+        fav.addEventListener('click',e=>{e.stopPropagation();if(favorites.has(game.name))favorites.delete(game.name);else favorites.add(game.name);try{localStorage.setItem('soakhub-favorites',JSON.stringify([...favorites]));}catch(err){}render();});
+        art.appendChild(fav);card.appendChild(art);
+        const footer=el('div','card-footer');footer.appendChild(el('div','game-title',game.name));footer.appendChild(el('div','game-genre',game.genre));card.appendChild(footer);
+        card.addEventListener('click',()=>openGame(game));card.addEventListener('keydown',e=>{if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openGame(game);}});
+        grid.appendChild(card);
+      });
+    }
+    function showLoad(title,description,failed=false){$('load-title').textContent=title;$('load-hint').textContent=description;$('loadscreen').className='loadscreen'+(failed?' failed':'');$('loading-bar').style.display=failed?'none':'block';}
+    async function openGame(game){
+      const token=++requestId;
+      $('player-name').textContent=game.name;
+      $('player').classList.add('active');$('player').setAttribute('aria-hidden','false');
+      $('chat-panel').classList.remove('open');
+      gameFrame.removeAttribute('srcdoc');showLoad('Loading '+game.name,'Downloading the game file...');
+      try{
+        const url=ASSETS+game.file;
+        const response=await fetch(url,{cache:'default'});
+        if(!response.ok)throw new Error('HTTP '+response.status+' while fetching the game');
+        let html=await response.text();
+        if(token!==requestId)return;
+        const base='<base href="'+url+'" />';
+        if(/<head\b[^>]*>/i.test(html))html=html.replace(/<head\b[^>]*>/i,match=>match+base);
+        else html=base+html;
+        showLoad('Starting '+game.name,'The game may display its own loading screen.');
+        gameFrame.onload=()=>{if(token===requestId){$('loadscreen').classList.add('done');}};
+        gameFrame.srcdoc=html;
+      }catch(err){
+        if(token!==requestId)return;
+        console.error('SoakHub game failed:',err);
+        showLoad('Could not load '+game.name,'The game file may be unavailable or blocked by the browser. '+err.message,true);
+      }
+    }
+    function closeGame(){requestId++;gameFrame.onload=null;gameFrame.removeAttribute('srcdoc');gameFrame.src='about:blank';$('player').classList.remove('active');$('player').setAttribute('aria-hidden','true');}
+    $('close-game').addEventListener('click',closeGame);
+    $('fullscreen').addEventListener('click',()=>{const host=$('player');if(!document.fullscreenElement){const promise=host.requestFullscreen?host.requestFullscreen():null;if(promise&&promise.catch)promise.catch(err=>console.warn('Fullscreen unavailable:',err));}else if(document.exitFullscreen)document.exitFullscreen();});
+    $('search').addEventListener('input',render);$('genre').addEventListener('change',render);$('sort').addEventListener('change',render);
+    $('random-game').addEventListener('click',()=>{const visible=filteredGames();const pool=visible.length?visible:games;openGame(pool[Math.floor(Math.random()*pool.length)]);});
+    $('chat-toggle').addEventListener('click',()=>{$('chat-panel').classList.toggle('open');if($('chat-panel').classList.contains('open'))$('chat-input').focus();});
+    $('chat-close').addEventListener('click',()=>{$('chat-panel').classList.remove('open');});
+    function bubble(text,asUser=false){const msg=el('div','bubble'+(asUser?' user':''),text);$('messages').appendChild(msg);$('messages').scrollTop=$('messages').scrollHeight;return msg;}
+    $('chat-form').addEventListener('submit',async e=>{
+      e.preventDefault();const input=$('chat-input');const question=input.value.trim();if(!question||$('send-chat').disabled)return;
+      input.value='';bubble(question,true);
+      if(CHAT_ENDPOINT.includes('YOUR-WORKER')){bubble('AI setup needed: deploy the included Cloudflare Worker, then set CHAT_ENDPOINT in SoakHub.svg to its URL. Do not embed the API key in the SVG.');return;}
+      const reply=bubble('Thinking...');$('send-chat').disabled=true;
+      try{
+        const res=await fetch(CHAT_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({message:question,history:history.slice(-8)})});
+        const data=await res.json();if(!res.ok)throw new Error(data.error||'Server error '+res.status);
+        if(!data.reply)throw new Error('Empty response');reply.textContent=data.reply;
+        history.push({role:'user',text:question},{role:'model',text:data.reply});if(history.length>8)history.splice(0,history.length-8);
+      }catch(err){reply.textContent='AI unavailable: '+err.message;}finally{$('send-chat').disabled=false;input.focus();$('messages').scrollTop=$('messages').scrollHeight;}
+    });
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('chat-panel').classList.contains('open'))$('chat-panel').classList.remove('open');else if($('player').classList.contains('active')&&!document.fullscreenElement)closeGame();}});
+    render();
+  ]]></script>
+</svg>
