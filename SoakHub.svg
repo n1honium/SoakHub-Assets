@@ -1,0 +1,372 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" style="position:fixed;inset:0;display:block;background:#080f1c;">
+  <title>SoakHub</title>
+  <foreignObject x="0" y="0" width="100%" height="100%">
+    <div xmlns="http://www.w3.org/1999/xhtml" id="soakhub">
+      <style><![CDATA[
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&display=swap');
+        * { box-sizing:border-box; }
+        #soakhub { --bg:#080f1c; --surface:#101d30; --surface2:#14243a; --line:#263951; --text:#e8f1ff; --muted:#8ba4bf; --blue:#4caaff; --cyan:#68dbf5; width:100%;height:100%;overflow:auto;color:var(--text);background:radial-gradient(ellipse 95% 48% at 48% -20%,#1f4770 0%,transparent 72%),var(--bg);font:800 14px/1.45 'Nunito',system-ui,sans-serif; }
+        #soakhub button, #soakhub input, #soakhub select { font:inherit; }
+        #soakhub button { cursor:pointer; }
+        #soakhub button:focus-visible, #soakhub input:focus-visible, #soakhub select:focus-visible, #soakhub [role="button"]:focus-visible {outline:2px solid var(--cyan);outline-offset:3px;}
+        #soakhub .topbar { position:sticky;top:0;z-index:20;background:rgba(11,22,39,.96);border-bottom:1px solid #284361;backdrop-filter:blur(16px);box-shadow:0 4px 22px rgba(0,0,0,.18); }
+        #soakhub .nav { max-width:1690px;margin:auto;min-height:78px;padding:12px 32px;display:flex;align-items:center;gap:24px; }
+        #soakhub .brand { display:flex;align-items:center;gap:11px;min-width:196px; }
+        #soakhub .brand-icon { width:46px;height:46px;background:linear-gradient(150deg,#2e91e6,#2053a9);border:1px solid #75c7ff80;border-radius:13px;display:grid;place-items:center;box-shadow:0 5px 16px #12458155;flex:none; }
+        #soakhub .brand-icon svg { width:31px;height:31px; }
+        #soakhub .brand-name {font-size:23px;font-weight:780;letter-spacing:-1.1px;line-height:1.1;color:#ffffff;}
+        #soakhub .brand-name span {color:#77d7ff;}
+        #soakhub .brand-sub {font-size:10px;letter-spacing:2.6px;text-transform:uppercase;color:#7599bc;font-weight:750;margin-top:3px;}
+        #soakhub .search-controls {display:flex;align-items:center;justify-content:center;gap:11px;flex:1;min-width:0;}
+        #soakhub .search-wrap {position:relative;width:min(380px,100%);}
+        #soakhub .search-wrap svg {position:absolute;left:14px;top:50%;transform:translateY(-50%);color:#91acc9;}
+        #soakhub .search-input,#soakhub .select {background:#101e32;border:1px solid #2b425c;border-radius:11px;height:42px;color:var(--text);outline:none;transition:.2s border-color,.2s background;}
+        #soakhub .search-input:hover,#soakhub .select:hover {border-color:#507ba0;}
+        #soakhub .search-input:focus,#soakhub .select:focus {border-color:#4dafff;}
+        #soakhub .search-input {width:100%;padding:0 14px 0 42px;}
+        #soakhub .search-input::placeholder {color:#91a7be;}
+        #soakhub .select {padding:0 33px 0 14px;min-width:126px;cursor:pointer;color:#d7e8fb;}
+        #soakhub .select option {background:#13243c;color:white;}
+        #soakhub .nav-actions {display:flex;gap:9px;align-items:center;justify-content:flex-end;min-width:130px;}
+        #soakhub .icon-btn {width:42px;height:42px;border-radius:11px;border:1px solid #2d4a66;background:#152c46;color:#adceee;display:grid;place-items:center;transition:background .15s,transform .15s,border-color .15s;}
+        #soakhub .icon-btn:hover {background:#204368;border-color:#4dafff;color:white;transform:translateY(-1px);}
+        #soakhub .icon-btn svg {width:21px;height:21px;}
+        #soakhub .canvas {max-width:1690px;padding:34px 32px 70px;margin:0 auto;}
+        #soakhub .welcome {display:flex;justify-content:space-between;align-items:center;gap:20px;padding:39px 2px 31px;}
+        #soakhub .eyebrow {display:flex;align-items:center;gap:9px;color:#79cef8;font-size:11px;font-weight:750;letter-spacing:2.8px;text-transform:uppercase;margin-bottom:9px;}
+        #soakhub .pulse {width:7px;height:7px;border-radius:50%;background:#56d9ee;box-shadow:0 0 0 4px #56d9ee22;}
+        #soakhub h1 {margin:0;font-size:clamp(27px,3vw,41px);letter-spacing:-1.6px;font-weight:790;line-height:1.2;}
+        #soakhub h1 span {background:linear-gradient(100deg,#64b9ff,#70e1f1);-webkit-background-clip:text;background-clip:text;color:transparent;}
+        #soakhub .welcome p {margin:9px 0 0;color:#95abc3;font-size:14px;}
+        #soakhub .stat {display:flex;align-items:center;gap:12px;background:linear-gradient(125deg,#18395688,#142c4488);padding:14px 20px;border-radius:15px;border:1px solid #2c4d6b;min-width:180px;}
+        #soakhub .stat-number {font-size:27px;font-weight:800;color:#9edfff;line-height:1;}
+        #soakhub .stat-label {font-size:11px;letter-spacing:1.4px;color:#8ba9c7;text-transform:uppercase;font-weight:750;}
+        #soakhub .section-head {display:flex;align-items:center;justify-content:space-between;gap:16px;margin:0 0 20px;}
+        #soakhub .section-name {display:flex;align-items:center;gap:10px;margin:0;font-size:18px;letter-spacing:-.3px;font-weight:740;}
+        #soakhub .section-name svg {color:#69c9ff;}
+        #soakhub .count {color:#8baecb;border:1px solid #2a4564;border-radius:30px;background:#13263e;padding:2px 9px;font-size:12px;}
+        #soakhub .grid {display:grid;grid-template-columns:repeat(auto-fill,minmax(185px,1fr));gap:18px;}
+        #soakhub .game-card {position:relative;min-width:0;background:linear-gradient(160deg,#182b42,#132238);border:1px solid #2b415b;border-radius:15px;overflow:hidden;transition:transform .18s ease,border-color .18s ease,box-shadow .18s ease;cursor:pointer;}
+        #soakhub .game-card:hover {transform:translateY(-4px);border-color:#5596ca;box-shadow:0 14px 32px #0007,0 0 0 1px #429bd21c;}
+        #soakhub .game-art {aspect-ratio:1.04/1;position:relative;overflow:hidden;background:#16253a;}
+        #soakhub .game-art img {display:block;width:100%;height:100%;object-fit:cover;transition:transform .22s ease;}
+        #soakhub .game-card:hover .game-art img {transform:scale(1.045);}
+        #soakhub .art-overlay {pointer-events:none;position:absolute;inset:0;background:linear-gradient(0deg,#07131b66,transparent 32%);}
+        #soakhub .play-circle {display:grid;place-items:center;position:absolute;left:50%;top:50%;transform:translate(-50%,-44%) scale(.9);width:54px;height:54px;border-radius:50%;background:#08192fdc;border:1px solid #a1dafa96;box-shadow:0 9px 30px #0614238c;color:#e9f7ff;opacity:0;transition:.2s opacity,.2s transform;}
+        #soakhub .game-card:hover .play-circle {opacity:1;transform:translate(-50%,-50%) scale(1);}
+        #soakhub .favorite {position:absolute;right:9px;top:9px;width:34px;height:34px;border-radius:10px;background:#091a2aca;color:#c6d5e7;border:1px solid #ffffff44;display:grid;place-items:center;z-index:2;opacity:.6;}
+        #soakhub .favorite:hover,#soakhub .favorite.is-fav {opacity:1;color:#8cdfff;background:#173d5fdc;}
+        #soakhub .card-footer {min-height:68px;padding:11px 12px 10px;display:flex;flex-direction:column;justify-content:center;}
+        #soakhub .game-title {font-size:13px;font-weight:710;line-height:1.2;color:#e7f1ff;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;}
+        #soakhub .empty {display:none;text-align:center;border:1px dashed #385371;border-radius:16px;padding:60px 20px;color:#95afc9;}
+        #soakhub .empty strong {display:block;font-size:17px;color:#e4edfa;margin-bottom:6px;}
+        #soakhub .page-bottom {margin:45px 0 0;padding-top:20px;border-top:1px solid #253951;display:flex;justify-content:space-between;gap:12px;color:#6e8da9;font-size:12px;}
+        #soakhub .overlay {position:fixed;inset:0;display:none;z-index:50;background:#070d16;}
+        #soakhub .overlay.active {display:flex;flex-direction:column;}
+        #soakhub .playerbar {display:flex;align-items:center;justify-content:space-between;gap:18px;min-height:66px;padding:10px 21px;border-bottom:1px solid #295374;background:linear-gradient(95deg,#174779,#102c50 58%,#0b2641);}
+        #soakhub .player-left {display:flex;align-items:center;gap:13px;min-width:0;}
+        #soakhub .player-title {font-size:16px;font-weight:760;white-space:nowrap;text-overflow:ellipsis;overflow:hidden;}
+        #soakhub .player-actions {display:flex;gap:9px;flex:none;}
+        #soakhub .action-button {height:37px;display:inline-flex;align-items:center;gap:7px;padding:0 14px;border:1px solid #70b6e366;color:#e7f5ff;background:#2d6b9955;border-radius:10px;font-size:12px;font-weight:700;}
+        #soakhub .action-button:hover {background:#3c8bb077;border-color:#90d8fa;}
+        #soakhub .action-button svg {width:16px;height:16px;}
+        #soakhub .playarea {flex:1;position:relative;min-height:0;}
+        #soakhub .game-frame {position:absolute;inset:0;width:100%;height:100%;border:0;background:#04060a;display:block;}
+        #soakhub .loadscreen {position:absolute;inset:0;background:#090f1b;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:13px;z-index:2;pointer-events:none;transition:opacity .35s;}
+        #soakhub .loadscreen.done {opacity:0;visibility:hidden;}
+        #soakhub .loadscreen.failed {pointer-events:auto;}
+        #soakhub .water-mark {display:grid;place-items:center;width:94px;height:94px;background:linear-gradient(145deg,#1c5280,#15305a);border:1px solid #6eb2dc77;border-radius:23px;box-shadow:0 15px 50px #0e477045;margin-bottom:5px;}
+        #soakhub .water-mark svg {width:62px;height:62px;}
+        #soakhub .load-title {font-size:17px;font-weight:750;margin-top:3px;}
+        #soakhub .load-hint {font-size:12px;color:#86a6c4;text-align:center;max-width:420px;padding:0 12px;}
+        #soakhub .loading-bar {width:166px;height:4px;border-radius:6px;background:#29445c;overflow:hidden;margin-top:9px;}
+        #soakhub .loading-bar:before {content:'';display:block;width:45%;height:100%;background:linear-gradient(90deg,#468dff,#8eeeff);border-radius:6px;animation:loading 1.35s ease-in-out infinite alternate;}
+        @keyframes loading {from {transform:translateX(-100%);}to {transform:translateX(300%);}}
+        @media(max-width:900px){#soakhub .nav{flex-wrap:wrap;padding:12px 19px;gap:12px;}#soakhub .brand{min-width:0;flex:1;}#soakhub .nav-actions{min-width:0;}#soakhub .search-controls{order:3;width:100%;flex:0 0 100%;justify-content:stretch;}#soakhub .search-wrap{flex:1;}#soakhub .canvas{padding:28px 19px 50px;}#soakhub .welcome{padding-top:28px;}#soakhub .grid{grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:14px;}}
+        @media(max-width:520px){#soakhub .nav{padding:12px;}#soakhub .brand-name{font-size:20px;}#soakhub .brand-icon{width:40px;height:40px;}#soakhub .search-controls{gap:7px;}#soakhub .select{min-width:0;width:95px;padding-left:7px;padding-right:9px;font-size:12px;}#soakhub .search-input{font-size:12px;}#soakhub .welcome{padding:25px 0 22px;}#soakhub .welcome p{font-size:12px;}#soakhub .stat{display:none;}#soakhub .canvas{padding:24px 12px 40px;}#soakhub .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:11px;}#soakhub .game-card{border-radius:12px;}#soakhub .game-title{font-size:12px;}#soakhub .playerbar{padding:9px 11px;}#soakhub .action-button{padding:0 9px;font-size:11px;}#soakhub .section-right{display:none;}#soakhub .ai-main{padding:12px 12px 14px;}#soakhub .ai-nav{padding:0 14px;}#soakhub .ai-topbar{min-height:67px;}#soakhub .chat-messages{padding:20px 2px;}#soakhub .chat-intro h2{font-size:26px;}#soakhub .ai-back{padding:0 10px;}#soakhub .ai-back-label{display:none;}#soakhub .player-overline{display:none;}}
+        @media(prefers-reduced-motion:reduce){#soakhub *,#soakhub *:before{animation:none!important;transition:none!important;}}
+
+        /* Global typography: Nunito, every word bold (including placeholders). */
+        #soakhub, #soakhub *, #soakhub *::before, #soakhub *::after {
+          font-family:'Nunito',system-ui,sans-serif !important;
+          font-weight:800 !important;
+        }
+        #soakhub input::placeholder {font-family:'Nunito',system-ui,sans-serif !important;font-weight:800 !important;}
+        #soakhub .auth-heading {margin-bottom:22px;}
+        #soakhub .profile-title {margin:0 0 25px;}
+        #soakhub .card-footer {min-height:51px;padding:10px 12px;}
+        #soakhub .load-hint {display:none;}
+        #soakhub .loadscreen.failed .load-hint {display:block;}
+        #soakhub .section-head {margin-bottom:18px;}
+        #soakhub .profile-panel h3 {margin-bottom:14px;}
+                #soakhub .nav-actions {min-width:46px;}
+        #soakhub .account-trigger {width:43px;height:43px;border-radius:13px;border:1px solid #47779d;background:linear-gradient(145deg,#234f7a,#153151);color:#d8efff;display:grid;place-items:center;position:relative;}
+        #soakhub .account-trigger:hover {border-color:#7fd3ff;background:#254f7b;}
+        #soakhub .account-trigger svg {width:21px;height:21px;}
+        #soakhub .account-indicator {position:absolute;width:8px;height:8px;border-radius:50%;background:#64e3c6;border:2px solid #123052;right:2px;bottom:2px;display:none;}
+        #soakhub .account-trigger.signed-in .account-indicator {display:block;}
+        #soakhub .account-page {position:fixed;inset:0;z-index:90;display:none;flex-direction:column;background:radial-gradient(ellipse 80% 65% at 60% -40%,#214b74 0%,transparent 76%),#080f1c;overflow:auto;}
+        #soakhub .account-page.active {display:flex;}
+        #soakhub .account-header {flex:none;display:flex;align-items:center;justify-content:space-between;gap:14px;min-height:80px;padding:14px clamp(20px,5vw,58px);border-bottom:1px solid #29425e;background:#0b1728dd;}
+        #soakhub .account-brand {display:flex;align-items:center;gap:11px;font-size:19px;font-weight:750;}
+        #soakhub .account-close {display:flex;align-items:center;gap:9px;height:39px;background:#152940;border:1px solid #395471;border-radius:11px;padding:0 14px;color:#d5eaff;font-weight:650;}
+        #soakhub .account-close:hover {background:#203b58;border-color:#66b6e8;}
+        #soakhub .account-content {width:min(980px,100%);margin:0 auto;flex:1;display:flex;justify-content:center;align-items:flex-start;flex-direction:column;padding:45px 22px 80px;}
+        #soakhub .auth-card {width:min(460px,100%);align-self:center;border:1px solid #304d6b;background:linear-gradient(145deg,#15263d,#0e1b2d);border-radius:23px;padding:32px;box-shadow:0 35px 90px #0006;}
+        #soakhub .auth-heading {font-size:25px;line-height:1.24;letter-spacing:-.6px;font-weight:760;margin:0 0 8px;}
+        #soakhub .auth-tabs {display:flex;gap:5px;padding:4px;background:#0b1829;border:1px solid #25425f;border-radius:12px;margin-bottom:22px;}
+        #soakhub .auth-tab {flex:1;border:0;border-radius:9px;padding:10px;color:#99b5cf;background:transparent;font-weight:690;}
+        #soakhub .auth-tab.active {background:#264c75;color:white;box-shadow:0 2px 10px #0004;}
+        #soakhub .auth-field {display:flex;flex-direction:column;gap:7px;margin-bottom:15px;font-size:12px;color:#b6cce1;font-weight:650;}
+        #soakhub .auth-input {width:100%;height:44px;padding:0 14px;border:1px solid #334e6d;background:#0a1728;border-radius:10px;color:#e7f4ff;outline:0;font-size:14px;}
+        #soakhub .auth-input:focus {border-color:#64bbff;box-shadow:0 0 0 3px #4caaff24;}
+        #soakhub .auth-input::placeholder {color:#718da9;}
+        #soakhub .auth-primary {width:100%;height:45px;border:1px solid #89d5ff66;color:#062036;background:linear-gradient(115deg,#67c8ff,#83e2f4);border-radius:11px;font-weight:790;margin-top:4px;}
+        #soakhub .auth-primary:disabled {opacity:.5;cursor:wait;}
+        #soakhub .auth-msg {min-height:20px;font-size:12px;color:#8ecaff;margin:13px 0 0;line-height:1.5;overflow-wrap:anywhere;}
+        #soakhub .auth-msg.error {color:#ffaaa5;}
+        #soakhub .profile-view {width:100%;max-width:940px;margin:0 auto;}
+        #soakhub .profile-title {font-size:clamp(26px,4vw,39px);margin:6px 0 6px;font-weight:790;letter-spacing:-1px;}
+        #soakhub .profile-toolbar {display:flex;align-items:center;justify-content:space-between;gap:15px;flex-wrap:wrap;margin-bottom:20px;}
+        #soakhub .profile-tabs {display:flex;gap:8px;flex-wrap:wrap;}
+        #soakhub .profile-tab {border:1px solid #355878;background:#14283f;color:#a8c6e1;padding:11px 17px;border-radius:12px;font-weight:650;}
+        #soakhub .profile-tab.active {background:#245686;border-color:#69bbfa;color:white;}
+        #soakhub .signout {border:1px solid #3d536d;border-radius:11px;color:#b7cde2;background:transparent;padding:11px 17px;}
+        #soakhub .signout:hover {border-color:#73bee9;color:white;}
+        #soakhub .metric-grid {display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:13px;margin-bottom:20px;}
+        #soakhub .metric {padding:20px;background:#14263d;border:1px solid #2b4564;border-radius:16px;}
+        #soakhub .metric-value {font-size:clamp(19px,3vw,29px);letter-spacing:-.6px;font-weight:800;color:#a1e5ff;}
+        #soakhub .metric-label {font-size:12px;color:#8daac6;margin-top:4px;}
+        #soakhub .profile-panel {border:1px solid #2c4864;background:#112137;border-radius:17px;padding:21px;}
+        #soakhub .profile-panel h3 {margin:0 0 11px;font-size:18px;}
+        #soakhub .profile-panel p {color:#8eafc9;line-height:1.5;}
+        #soakhub .rank-row {display:grid;grid-template-columns:50px minmax(0,1fr) 160px;align-items:center;gap:12px;padding:14px 13px;border-top:1px solid #2a435b;color:#bdd5e9;}
+        #soakhub .rank-row.mine {background:#1b3a5b;border-radius:10px;}
+        #soakhub .rank-pos {font-weight:760;color:#78cfff;font-size:15px;}
+        #soakhub .rank-user {color:#e6f3ff;font-weight:650;overflow-wrap:anywhere;}
+        #soakhub .rank-time {text-align:right;font-variant-numeric:tabular-nums;color:#a8d5fa;font-weight:680;}
+        #soakhub .secondary-link {background:transparent;border:0;color:#79cfff;text-decoration:underline;text-underline-offset:3px;padding:0;font-size:12px;}
+        @media(max-width:580px){#soakhub .auth-card{padding:24px 19px;}#soakhub .account-content{padding:24px 13px 40px;}#soakhub .account-header{min-height:66px;padding:11px 14px;}#soakhub .account-brand{font-size:16px;}#soakhub .metric-grid{gap:7px;}#soakhub .metric{padding:13px 10px;}#soakhub .metric-value{font-size:18px;}#soakhub .rank-row{grid-template-columns:32px minmax(0,1fr) 110px;padding:12px 6px;gap:7px;}#soakhub .rank-time{font-size:12px;}}
+      ]]></style>
+      <header class="topbar">
+        <nav class="nav" aria-label="SoakHub navigation">
+          <div class="brand" aria-label="SoakHub Home">
+            <div class="brand-icon"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 17c6.1-7 12.5-7 19 0s12.9 7 19 0M5 28c6.1-7 12.5-7 19 0s12.9 7 19 0" fill="none" stroke="#e7f8ff" stroke-width="5" stroke-linecap="round"/></svg></div>
+            <div class="brand-name"><span>Soak</span>Hub</div>
+          </div>
+          <div class="search-controls">
+            <label class="search-wrap" aria-label="Search games">
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="7"/><path d="m16 16 5 5"/></svg>
+              <input class="search-input" id="search" type="search" placeholder="Search games..." autocomplete="off" />
+            </label>
+            <select class="select" id="filter" aria-label="Filter games" title="Filter games"><option value="all">ALL</option><option value="az">A–Z</option><option value="za">Z–A</option><option value="1z">1–Z</option><option value="19">1–9</option><option value="91">9–1</option></select>
+          </div>
+          <div class="nav-actions">
+            <button class="account-trigger" id="account-toggle" title="Account" aria-label="Open account" aria-expanded="false"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4.5 21c0-4 3.4-6.6 7.5-6.6s7.5 2.6 7.5 6.6"/></svg><span class="account-indicator"></span></button>
+          </div>
+        </nav>
+      </header>
+      <main class="canvas">
+        <section aria-label="Game library">
+          <div class="section-head"><h2 class="section-name"><svg xmlns="http://www.w3.org/2000/svg" width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m12 2 2.6 6.4L21 11l-6.4 2.6L12 20l-2.6-6.4L3 11l6.4-2.6z"/></svg> Featured games <span class="count" id="visible-count">6</span></h2></div>
+          <div class="grid" id="games"></div>
+          <div class="empty" id="empty"><strong>No games found</strong></div>
+        </section>
+      </main>
+      <section id="player" class="overlay" aria-label="Game player" aria-hidden="true">
+        <div class="playerbar">
+          <div class="player-left"><div class="brand-icon" style="width:38px;height:38px;border-radius:10px;"><svg viewBox="0 0 48 48" aria-hidden="true" style="width:24px;height:24px;"><path d="M5 17c6.1-7 12.5-7 19 0s12.9 7 19 0M5 28c6.1-7 12.5-7 19 0s12.9 7 19 0" fill="none" stroke="#e7f8ff" stroke-width="5" stroke-linecap="round"/></svg></div><div style="min-width:0;"><div class="player-title" id="player-name">Game</div></div></div>
+          <div class="player-actions"><button id="fullscreen" class="action-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 3H3v5M16 3h5v5M3 16v5h5M21 16v5h-5"/></svg> Fullscreen</button><button id="close-game" class="action-button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 5 19 19M19 5 5 19"/></svg> Close</button></div>
+        </div>
+        <div class="playarea" id="playarea"><iframe id="game-frame" class="game-frame" title="Game content" sandbox="allow-scripts allow-forms allow-pointer-lock allow-modals allow-popups allow-downloads" allow="fullscreen; autoplay; gamepad" allowfullscreen="allowfullscreen"></iframe>
+          <div class="loadscreen" id="loadscreen"><div class="water-mark"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 17c6.1-7 12.5-7 19 0s12.9 7 19 0M5 28c6.1-7 12.5-7 19 0s12.9 7 19 0" fill="none" stroke="#e7f8ff" stroke-width="4.5" stroke-linecap="round"/></svg></div><div class="load-title" id="load-title">Loading game</div><div class="load-hint" id="load-hint"></div><div class="loading-bar" id="loading-bar"></div></div>
+        </div>
+      </section>
+      <section class="account-page" id="account-page" aria-label="SoakHub account" aria-hidden="true">
+        <header class="account-header">
+          <div class="account-brand"><div class="brand-icon" style="width:40px;height:40px;border-radius:11px;"><svg viewBox="0 0 48 48" aria-hidden="true"><path d="M5 17c6-7 12.5-7 19 0s13 7 19 0M5 28c6-7 12.5-7 19 0s13 7 19 0" fill="none" stroke="#e7f8ff" stroke-width="5" stroke-linecap="round"/></svg></div><span><span style="color:#77d7ff;">Soak</span><span style="color:#ffffff;">Hub</span></span></div>
+          <button id="account-close" class="account-close" type="button">Back to games</button>
+        </header>
+        <div class="account-content">
+          <div id="guest-view" class="auth-card">
+            <h2 class="auth-heading" id="auth-title">Log in</h2>
+            
+            <div class="auth-tabs" role="tablist" aria-label="Account access">
+              <button type="button" id="signin-tab" class="auth-tab active" aria-selected="true">Log in</button>
+              <button type="button" id="signup-tab" class="auth-tab" aria-selected="false">Sign up</button>
+            </div>
+            <form id="auth-form" autocomplete="on">
+              <label class="auth-field" id="username-field" style="display:none;">Username
+                <input id="signup-username" class="auth-input" type="text" minlength="3" maxlength="20" placeholder="3–20 letters, digits, underscores" autocomplete="username" />
+              </label>
+              <label class="auth-field" id="identifier-field">Username
+                <input id="signin-identifier" class="auth-input" type="text" placeholder="Username" autocomplete="username" />
+              </label>
+              <label class="auth-field">Password
+                <input id="auth-password" class="auth-input" type="password" placeholder="Enter your password" autocomplete="current-password" />
+              </label>
+              
+              <button class="auth-primary" type="submit" id="auth-submit">Log in</button>
+            </form>
+            <div class="auth-msg" id="auth-msg" role="status" aria-live="polite"></div>
+          </div>
+          <div id="profile-view" class="profile-view" style="display:none;">
+            
+            <h2 class="profile-title" id="profile-name">Welcome</h2>
+            
+            <div class="profile-toolbar"><div class="profile-tabs">
+              <button class="profile-tab active" id="overview-tab" type="button">Overview</button>
+              <button class="profile-tab" id="leaderboard-tab" type="button">Leaderboard</button>
+              <button class="profile-tab" id="favorites-tab" type="button">Favorites</button>
+            </div><button id="signout" class="signout" type="button">Log out</button></div>
+            <div id="overview-pane">
+              <div class="metric-grid">
+                <div class="metric"><div class="metric-value" id="metric-hours">0h</div><div class="metric-label">Hours played</div></div>
+                <div class="metric"><div class="metric-value" id="metric-minutes">0m</div><div class="metric-label">Minutes played</div></div>
+                <div class="metric"><div class="metric-value" id="metric-favorites">0</div><div class="metric-label">Favorite games</div></div>
+              </div>
+              
+            </div>
+            <div id="leaderboard-pane" style="display:none;" class="profile-panel"><h3>Leaderboard</h3><div id="rank-list" aria-live="polite">Loading...</div></div>
+            <div id="favorites-pane" style="display:none;" class="profile-panel"><h3>Favorites</h3><p id="favorite-names"></p><button type="button" class="secondary-link" id="browse-favorites">Browse games</button></div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </foreignObject>
+  <script><![CDATA[
+    const PROJECT_URL='https://frnjbxoeigkaygkypjdr.supabase.co';
+    // PUBLIC publishable key only. Never insert the service-role/secret key.
+    const PUBLISHABLE_KEY='sb_publishable_McVnAZDs-0Bjj-R-dQmwww_T4HHQHAh';
+    const USERNAME_LOGIN_ENDPOINT=PROJECT_URL+'/functions/v1/soakhub-username-login';
+    const ASSETS='https://cdn.jsdelivr.net/gh/n1honium/SoakHub-Assets/';
+    const games=[
+      {name:'Among Us',file:'AmongUs.html',image:'AmongUs.png',genre:'Social'},
+      {name:'A Dance of Fire and Ice',file:'A-Dance-Of-Fire-And-Ice.html',image:'A-Dance-Of-Fire-And-Ice.png',genre:'Rhythm'},
+      {name:'Brotato',file:'Brotato.html',image:'Brotato.jpeg',genre:'Action'},
+      {name:'Binding of Isaac',file:'Binding-of-Isaac.html',image:'Binding-of-Isaac.png',genre:'Roguelike'},
+      {name:'Bitlife',file:'Bitlife.html',image:'Bitlife.png',genre:'Simulation'},
+      {name:'Basketball Stars',file:'Basketball-Stars.html',image:'Basketball-Stars.jpeg',genre:'Sports'}
+    ];
+    const $=id=>document.getElementById(id);
+    const grid=$('games');
+    const gameFrame=$('game-frame');
+    const NS='http://www.w3.org/1999/xhtml';
+    const SVGNS='http://www.w3.org/2000/svg';
+    const favorites=new Set();
+    let db=null, user=null, profile=null, activeSession=null;
+    let requestId=0, gameReady=false, currentGame=null, loadingAccount=false, heartbeatBusy=false;
+    let mode='signin', currentPane='overview', sessionStartBusy=false, favoritesBrowseOnly=false;
+
+    function el(tag,className,text){const n=document.createElementNS(NS,tag);if(className)n.className=className;if(text!==undefined)n.textContent=text;return n;}
+    function iconPath(d){const s=document.createElementNS(SVGNS,'svg');s.setAttribute('viewBox','0 0 24 24');s.setAttribute('width','21');s.setAttribute('height','21');s.setAttribute('fill','none');s.setAttribute('stroke','currentColor');s.setAttribute('stroke-width','2');s.setAttribute('stroke-linecap','round');s.setAttribute('stroke-linejoin','round');const p=document.createElementNS(SVGNS,'path');p.setAttribute('d',d);s.appendChild(p);return s;}
+    function errorMessage(e){return String(e?.message||e||'Request failed');}
+    function authMessage(message,fail=false){$('auth-msg').textContent=message;$('auth-msg').classList.toggle('error',fail);}
+    function startsWithNumber(name){return /^\d/.test(String(name||'').trim());}
+    function compareNames(a,b,desc=false){return (desc?-1:1)*a.name.localeCompare(b.name,undefined,{numeric:true,sensitivity:'base'});}
+    function filteredGames(){const q=$('search').value.toLowerCase().trim(),filter=$('filter').value;let list=games.filter(g=>g.name.toLowerCase().includes(q)&&(favoritesBrowseOnly?favorites.has(g.name):true));
+      if(filter==='19'||filter==='91') list=list.filter(g=>startsWithNumber(g.name));
+      if(filter==='az') list.sort((a,b)=>compareNames(a,b,false));
+      else if(filter==='za') list.sort((a,b)=>compareNames(a,b,true));
+      else if(filter==='1z') list.sort((a,b)=>{const an=startsWithNumber(a.name),bn=startsWithNumber(b.name); if(an!==bn) return an?-1:1; return compareNames(a,b,false);});
+      else if(filter==='19') list.sort((a,b)=>compareNames(a,b,false));
+      else if(filter==='91') list.sort((a,b)=>compareNames(a,b,true));
+      return list;}
+    function render(){grid.replaceChildren();const list=filteredGames();$('visible-count').textContent=list.length;$('empty').style.display=list.length?'none':'block';
+      list.forEach(game=>{
+        const card=el('article','game-card');card.setAttribute('tabindex','0');card.setAttribute('role','button');card.setAttribute('aria-label','Play '+game.name);
+        const art=el('div','game-art'),img=el('img');img.src=ASSETS+game.image;img.alt=game.name+' cover';img.loading='lazy';img.onerror=()=>{img.onerror=null;img.style.display='none';art.style.background='#19334d';};art.appendChild(img);art.appendChild(el('div','art-overlay'));
+        const play=el('div','play-circle');play.appendChild(iconPath('m9 6 10 6-10 6z'));art.appendChild(play);
+        const fav=el('button','favorite'+(favorites.has(game.name)?' is-fav':''));fav.setAttribute('aria-label',favorites.has(game.name)?'Remove '+game.name+' from favorites':'Favorite '+game.name);fav.title=user?'Toggle favorite':'Sign in to save favorites';fav.appendChild(iconPath('m12 3 2.7 5.7 6.3.9-4.5 4.4 1.1 6.3-5.6-3-5.6 3 1.1-6.3-4.5-4.4 6.3-.9z'));
+        fav.addEventListener('click',e=>{e.stopPropagation();toggleFavorite(game.name);});art.appendChild(fav);card.appendChild(art);
+        const footer=el('div','card-footer');footer.appendChild(el('div','game-title',game.name));card.appendChild(footer);
+        card.addEventListener('click',()=>openGame(game));card.addEventListener('keydown',e=>{if(e.target===card&&(e.key==='Enter'||e.key===' ')){e.preventDefault();openGame(game);}});grid.appendChild(card);
+      });
+    }
+    async function toggleFavorite(name){if(!user||!db){showAccount('signin');authMessage('Log in to favorite games.');return;}
+      const was=favorites.has(name);if(was)favorites.delete(name);else favorites.add(name);render();
+      const result=was?await db.from('favorites').delete().eq('user_id',user.id).eq('game_id',name):await db.from('favorites').insert({user_id:user.id,game_id:name});
+      if(result.error){if(was)favorites.add(name);else favorites.delete(name);render();showAccount('overview');authMessage(errorMessage(result.error),true);}
+      refreshMetrics();
+    }
+    function showLoad(title,desc,fail=false){$('load-title').textContent=title;$('load-hint').textContent=desc;$('loadscreen').className='loadscreen'+(fail?' failed':'');$('loading-bar').style.display=fail?'none':'block';}
+    async function openGame(game){closeGame();currentGame=game;gameReady=false;const token=++requestId;$('player-name').textContent=game.name;$('player').classList.add('active');$('player').setAttribute('aria-hidden','false');showLoad('Loading '+game.name,'');
+      try{const url=ASSETS+game.file;const response=await fetch(url);if(!response.ok)throw new Error('HTTP '+response.status);let gameHtml=await response.text();if(token!==requestId)return;
+        const base='<base href="'+url+'" />';if(/<head\b[^>]*>/i.test(gameHtml))gameHtml=gameHtml.replace(/<head\b[^>]*>/i,m=>m+base);else gameHtml=base+gameHtml;
+        showLoad('Starting '+game.name,'');gameFrame.onload=()=>{if(token!==requestId)return;$('loadscreen').classList.add('done');gameReady=true;if(document.visibilityState==='visible')startSession();};gameFrame.srcdoc=gameHtml;
+      }catch(e){if(token===requestId)showLoad('Could not load '+game.name,errorMessage(e),true);}
+    }
+    function closeGame(){requestId++;gameReady=false;currentGame=null;finishSession();gameFrame.onload=null;gameFrame.removeAttribute('srcdoc');gameFrame.src='about:blank';$('player').classList.remove('active');$('player').setAttribute('aria-hidden','true');}
+    // Playtime counts only while a signed-in member has an opened, visible game.
+    async function startSession(){if(!db||!user||!currentGame||!gameReady||document.visibilityState!=='visible'||activeSession||sessionStartBusy)return;sessionStartBusy=true;
+      const expectedGame=currentGame.name;
+      try{const {data,error}=await db.rpc('begin_game_session',{p_game_id:expectedGame});if(error)throw error;
+        if(!user||!currentGame||currentGame.name!==expectedGame||!gameReady||document.visibilityState!=='visible'){await db.rpc('end_game_session',{p_session_id:data});return;}
+        activeSession=data;
+      }catch(e){console.warn('Playtime start failed:',e);}finally{sessionStartBusy=false;}
+    }
+    function finishSession(){const session=activeSession;activeSession=null;if(session&&db)db.rpc('end_game_session',{p_session_id:session}).then(()=>refreshMetrics()).catch(console.warn);}
+    async function heartbeat(){if(!db||!user||!activeSession||heartbeatBusy||!gameReady||document.visibilityState!=='visible')return;const session=activeSession;heartbeatBusy=true;
+      try{const {error}=await db.rpc('heartbeat_game_session',{p_session_id:session});if(error)throw error;}
+      catch(e){console.warn('Playtime heartbeat failed:',e);}finally{heartbeatBusy=false;}
+    }
+    setInterval(heartbeat,20000);
+    document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')finishSession();else if(gameReady)startSession();});
+    $('close-game').addEventListener('click',closeGame);
+    $('fullscreen').addEventListener('click',()=>{const node=$('player');if(!document.fullscreenElement){const p=node.requestFullscreen?.();if(p?.catch)p.catch(console.warn);}else document.exitFullscreen?.();});
+    $('search').addEventListener('input',()=>{favoritesBrowseOnly=false;render();});$('filter').addEventListener('change',()=>{favoritesBrowseOnly=false;render();});
+
+    function setMode(next){mode=next;const signup=mode==='signup';$('signin-tab').classList.toggle('active',!signup);$('signup-tab').classList.toggle('active',signup);$('signin-tab').setAttribute('aria-selected',String(!signup));$('signup-tab').setAttribute('aria-selected',String(signup));$('username-field').style.display=signup?'flex':'none';$('identifier-field').style.display=signup?'none':'flex';$('auth-password').setAttribute('autocomplete',signup?'new-password':'current-password');$('auth-title').textContent=signup?'Sign up':'Log in';$('auth-submit').textContent=signup?'Create account':'Log in';authMessage('');}
+    function showAccount(pane){$('account-page').classList.add('active');$('account-page').setAttribute('aria-hidden','false');$('account-toggle').setAttribute('aria-expanded','true');if(user){$('guest-view').style.display='none';$('profile-view').style.display='block';selectPane(pane==='leaderboard'?'leaderboard':pane==='favorites'?'favorites':'overview');refreshMetrics();}else{$('guest-view').style.display='block';$('profile-view').style.display='none';setMode(pane==='signup'?'signup':'signin');}}
+    function hideAccount(){$('account-page').classList.remove('active');$('account-page').setAttribute('aria-hidden','true');$('account-toggle').setAttribute('aria-expanded','false');}
+    $('account-toggle').addEventListener('click',()=>{if($('account-page').classList.contains('active'))hideAccount();else showAccount();});$('account-close').addEventListener('click',hideAccount);
+    $('signin-tab').addEventListener('click',()=>setMode('signin'));$('signup-tab').addEventListener('click',()=>setMode('signup'));
+    $('overview-tab').addEventListener('click',()=>selectPane('overview'));$('leaderboard-tab').addEventListener('click',()=>selectPane('leaderboard'));$('favorites-tab').addEventListener('click',()=>selectPane('favorites'));
+    $('browse-favorites').addEventListener('click',()=>{$('search').value='';$('filter').value='all';favoritesBrowseOnly=true;render();hideAccount();});
+    function selectPane(pane){if(!user)return;currentPane=pane;for(const name of ['overview','leaderboard','favorites']){$(name+'-pane').style.display=name===pane?'block':'none';$(name+'-tab').classList.toggle('active',name===pane);}if(pane==='leaderboard')loadLeaderboard();if(pane==='favorites')$('favorite-names').textContent=favorites.size?[...favorites].join(' · '):'No favorites';}
+    function timeLabel(seconds){const total=Math.floor(Number(seconds||0)/60);const hours=Math.floor(total/60);const minutes=total%60;return hours+'h '+minutes+'m';}
+    async function refreshMetrics(){if(!user||!db)return;$('metric-favorites').textContent=favorites.size;const {data,error}=await db.from('playtime_totals').select('seconds_played').eq('user_id',user.id).maybeSingle();if(error)return;const totalMinutes=Math.floor(Number(data?.seconds_played||0)/60);$('metric-hours').textContent=Math.floor(totalMinutes/60)+'h';$('metric-minutes').textContent=(totalMinutes%60)+'m';}
+    async function loadLeaderboard(){if(!db||!user)return;const box=$('rank-list');box.textContent='Loading...';
+      const {data:results,error}=await db.from('playtime_totals').select('user_id, seconds_played').order('seconds_played',{ascending:false}).limit(50);
+      if(error){box.textContent='Could not load leaderboard: '+errorMessage(error);return;}
+      if(!results?.length){box.textContent='No playtime yet.';return;}
+      const ids=results.map(x=>x.user_id);const {data:users}=await db.from('profiles').select('id,username').in('id',ids);
+      const names=new Map((users||[]).map(x=>[x.id,x.username]));box.replaceChildren();
+      results.forEach((item,i)=>{const row=el('div','rank-row'+(item.user_id===user.id?' mine':''));row.appendChild(el('span','rank-pos','#'+(i+1)));row.appendChild(el('span','rank-user',(names.get(item.user_id)||'Player')+(item.user_id===user.id?' (you)':'')));row.appendChild(el('span','rank-time',timeLabel(item.seconds_played)));box.appendChild(row);});
+    }
+    async function syncUser(){if(!db)return;const result=await db.auth.getUser();user=result?.data?.user||null;profile=null;favorites.clear();
+      if(user){const [{data:prof},{data:favs}]=await Promise.all([db.from('profiles').select('username').eq('id',user.id).maybeSingle(),db.from('favorites').select('game_id').eq('user_id',user.id)]);profile=prof;$('profile-name').textContent=profile?.username||'Player';for(const f of favs||[])favorites.add(f.game_id);$('account-toggle').classList.add('signed-in');}
+      else{$('account-toggle').classList.remove('signed-in');finishSession();}
+      render();if($('account-page').classList.contains('active'))showAccount();if(user&&gameReady)startSession();
+    }
+    async function initializeAuth(){if(PUBLISHABLE_KEY.includes('PASTE_SUPABASE'))return;
+      try{const mod=await import('https://esm.sh/@supabase/supabase-js@2');db=mod.createClient(PROJECT_URL,PUBLISHABLE_KEY,{auth:{detectSessionInUrl:true,autoRefreshToken:true,persistSession:true}});
+        db.auth.onAuthStateChange(()=>{setTimeout(syncUser,0);});await syncUser();}
+      catch(e){console.error('SoakHub auth initialization failed',e);authMessage('Authentication setup failed: '+errorMessage(e),true);}
+    }
+    $('auth-form').addEventListener('submit',async event=>{event.preventDefault();if(loadingAccount)return;
+      if(!db){authMessage('Setup required: add your Supabase publishable key to SoakHub.svg.',true);return;}
+      const pass=$('auth-password').value;const button=$('auth-submit');loadingAccount=true;button.disabled=true;authMessage('Connecting...');
+      try{if(mode==='signup'){
+          const username=$('signup-username').value.trim().toLowerCase();
+          if(!/^[a-z0-9_]{3,20}$/.test(username))throw Error('Username must be 3–20 letters, numbers, or underscores.');
+          if(pass.length<10||!/[A-Z]/.test(pass)||!/[^A-Za-z0-9]/.test(pass))throw Error('Password needs 10+ characters, one uppercase letter, and one special character.');
+          const resp=await fetch(USERNAME_LOGIN_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'signup',username,password:pass})});
+          const data=await resp.json();if(!resp.ok)throw Error(data.error||'Account creation failed');
+          const {error}=await db.auth.setSession({access_token:data.access_token,refresh_token:data.refresh_token});if(error)throw error;
+          $('auth-password').value='';await syncUser();showAccount('overview');
+        }else{
+          const identifier=$('signin-identifier').value.trim().toLowerCase();if(!identifier||!pass)throw Error('Enter your username and password.');
+          const resp=await fetch(USERNAME_LOGIN_ENDPOINT,{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({action:'login',username:identifier,password:pass})});
+          const data=await resp.json();if(!resp.ok)throw Error(data.error||'Username login failed');
+          const {error}=await db.auth.setSession({access_token:data.access_token,refresh_token:data.refresh_token});if(error)throw error;
+          $('auth-password').value='';await syncUser();showAccount('overview');
+        }
+      }catch(e){authMessage(errorMessage(e),true);}finally{loadingAccount=false;button.disabled=false;}
+    });
+    $('signout').addEventListener('click',async()=>{if(!db)return;finishSession();const {error}=await db.auth.signOut();if(error){authMessage(errorMessage(error),true);return;}await syncUser();showAccount('signin');});
+    document.addEventListener('keydown',e=>{if(e.key==='Escape'){if($('account-page').classList.contains('active'))hideAccount();else if($('player').classList.contains('active')&&!document.fullscreenElement)closeGame();}});
+    render();initializeAuth();
+  ]]></script>
+</svg>
